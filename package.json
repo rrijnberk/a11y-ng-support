@@ -1,0 +1,63 @@
+{
+  "name": "a11y-ng-support",
+  "description": "Support framework",
+  "version": "0.1.0",
+  "homepage": "https://github.com/rrijnberk/a11y-ng-support#readme",
+  "author": {
+    "name": "Richard Rijnberk",
+    "email": "richard@rijnberk.eu"
+  },
+  "contributors": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rrijnberk/a11y-ng-support.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rrijnberk/a11y-ng-support/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/rrijnberk/a11y-ng-support/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "Gruntfile.js",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt local"
+  },
+  "dependencies": {
+    "angular": "^1.4.7",
+    "angular-mocks": "^1.4.7",
+    "angular-resource": "^1.4.7",
+    "async": "^1.4.2",
+    "glob": "^7.0.0",
+    "grunt": "~0.4.5",
+    "lodash": "^4.6.0",
+    "path": "^0.12.7"
+  },
+  "keywords": [
+    "angular",
+    "a11y",
+    "keyboard",
+    "screenreader",
+    "framework"
+  ],
+  "devDependencies": {
+    "connect-livereload": "0.5.4",
+    "grunt": ">=0.4.0",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-connect": "^0.11.2",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-protractor-runner": "^3.0.0",
+    "grunt-shell": "^1.1.2",
+    "gruntmock": "^0.2.0",
+    "jasmine-node": "^1.14.5",
+    "load-grunt-tasks": "^3.4.0",
+    "protractor": "^3.0.0",
+    "serve-static": "^1.10.0"
+  }
+}

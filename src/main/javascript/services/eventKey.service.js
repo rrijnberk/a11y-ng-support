@@ -1,5 +1,5 @@
 function isKey(key){
-    return this.key === key.key || this.keyCode === key.keyCode || this.which === key.which;
+    return this.key === key.key || this.code === key.code || this.keyCode === key.keyCode || this.which === key.which;
 }
 
 function eventKeyService(a11y){

@@ -6,8 +6,7 @@ function KeyHandlerFactory(keyboardConfiguration, eventKeyService) {
         return function ($event) {
             var key = eventKeyService.get($event),
                 action = config.getEvent(key);
-
-            (action||angular.noop)($event);
+                action($event);
         };
     }
 
@@ -20,3 +19,4 @@ function KeyHandlerFactory(keyboardConfiguration, eventKeyService) {
 angular
     .module('a11y.support')
     .factory('keyHandlerFactory', KeyHandlerFactory);
+

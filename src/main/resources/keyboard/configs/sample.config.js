@@ -12,6 +12,19 @@
             console.log('You just pressed arrow down when focussed on the header');
         });
 
+        config.addEvent(a11y.keys.alphabetic, function () {
+            console.log('This should be logged for any alphabetical key');
+        });
+
+        config.addEvent(a11y.keys.alphanumeric, function () {
+            console.log('This should be logged for any alphanumeric key');
+        });
+
+        config.addEvent(a11y.keys.space, function () {
+            console.log('Totally spaced this');
+        });
+
+
     }
 
     angular

@@ -92,30 +92,44 @@ function Configuration() {
 
     // Todo:  Is this the best name, event seems inappropriate?
     this.addEvent = addEvent;
+    this.addEvents = addEvents;
     this.getEvent = getEvent;
     this.removeEvent = removeEvent;
 
     function addEvent(key, action, alt, ctrl, shift) {
-        var storageKey = JSON.parse(JSON.stringify(key));
-        storageKey.alt = !!alt;
-        storageKey.ctrl = !!ctrl;
-        storageKey.shift = !!shift;
-        keys.push(storageKey);
+        keys.push(generateTrueKey(key, alt, ctrl, shift));
         actions.push(action);
     }
 
+    function addEvents(keys, action, alt, ctrl, shift){
+        keys.map(function (key){
+            addEvent(key, action, alt, ctrl, shift)
+        });
+    }
+    
+    function generateTrueKey(key, alt, ctrl, shift){
+        var trueKey = JSON.parse(JSON.stringify(key));
+        trueKey.alt = !!alt;
+        trueKey.ctrl = !!ctrl;
+        trueKey.shift = !!shift;
+        return trueKey;
+    }
+    
     function getEvent(key) {
-        var action;
+        var action, trueKey;
         if (key) {
             action = actions[getIndex(key)];
             if (!action && isGrouping(grouping.alphabetical, key.key)) {
-                action = actions[getIndex(keyboardConstants.alphabetic)];
+                trueKey = generateTrueKey(keyboardConstants.alphabetic, key.alt, key.ctrl, key.shift);
+                action = actions[getIndex(trueKey)];
             }
             if (!action && isGrouping(grouping.numerical, key.key)) {
-                action = actions[getIndex(keyboardConstants.numeric)];
+                trueKey = generateTrueKey(keyboardConstants.numeric, key.alt, key.ctrl, key.shift);
+                action = actions[getIndex(trueKey)];
             }
             if (!action && isGrouping(grouping.alphanumerical, key.key)) {
-                action = actions[getIndex(keyboardConstants.alphanumeric)];
+                trueKey = generateTrueKey(keyboardConstants.alphanumeric, key.alt, key.ctrl, key.shift);
+                action = actions[getIndex(trueKey)];
             }
         }
         return action || angular.noop;
@@ -123,15 +137,15 @@ function Configuration() {
 
     function getIndex(key){
         for(var i = 0; i < keys.length; i++) {
-            if(angular.equals(key, keys[i])) {
+             if(angular.equals(key, keys[i])) {
                 return i;
             }
         }
         return -1;
     }
 
-    function removeEvent(key) {
-        var index = getIndex(key);
+    function removeEvent(key, alt, ctrl, shift) {
+        var index = getIndex(generateTrueKey(key, alt, ctrl, shift));
         if (index !== -1) {
             keys.splice(index, 1);
             actions.splice(index, 1);

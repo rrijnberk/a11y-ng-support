@@ -20,10 +20,23 @@
             console.log('This should be logged for any alphanumeric key');
         });
 
+
+
         config.addEvent(a11y.keys.space, function () {
             console.log('Totally spaced this');
         });
 
+        config.addEvent(a11y.keys.space, function () {
+            console.log('Totally in an alternate space man');
+        }, true);
+
+        config.addEvent(a11y.keys.space, function () {
+            console.log('Fully in a controlled space sir');
+        }, false, true);
+
+        config.addEvent(a11y.keys.space, function () {
+            console.log('Far out in a shifted space dude');
+        }, false, false, true);
 
     }
 

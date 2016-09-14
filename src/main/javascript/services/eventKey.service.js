@@ -10,7 +10,12 @@ function eventKeyService(a11y){
     }
 
     function keyForEvent(event) {
-        return Object.keys(a11y.keys).map(getValue).filter(angular.bind(event, isKey))[0];
+        var key = Object.keys(a11y.keys).map(getValue).filter(angular.bind(event, isKey))[0],
+            keyResult = JSON.parse(JSON.stringify(key || {}));
+        keyResult.alt = event.altKey;
+        keyResult.ctrl = event.ctrlKey;
+        keyResult.shift = event.shiftKey;
+        return keyResult;
     }
 }
 

@@ -95,30 +95,43 @@ function Configuration() {
     this.getEvent = getEvent;
     this.removeEvent = removeEvent;
 
-    function addEvent(key, action) {
-        keys.push(key);
+    function addEvent(key, action, alt, ctrl, shift) {
+        var storageKey = JSON.parse(JSON.stringify(key));
+        storageKey.alt = !!alt;
+        storageKey.ctrl = !!ctrl;
+        storageKey.shift = !!shift;
+        keys.push(storageKey);
         actions.push(action);
     }
 
     function getEvent(key) {
         var action;
         if (key) {
-            action = actions[keys.indexOf(key)];
+            action = actions[getIndex(key)];
             if (!action && isGrouping(grouping.alphabetical, key.key)) {
-                action = actions[keys.indexOf(keyboardConstants.alphabetic)];
+                action = actions[getIndex(keyboardConstants.alphabetic)];
             }
             if (!action && isGrouping(grouping.numerical, key.key)) {
-                action = actions[keys.indexOf(keyboardConstants.numeric)];
+                action = actions[getIndex(keyboardConstants.numeric)];
             }
             if (!action && isGrouping(grouping.alphanumerical, key.key)) {
-                action = actions[keys.indexOf(keyboardConstants.alphanumeric)];
+                action = actions[getIndex(keyboardConstants.alphanumeric)];
             }
         }
         return action || angular.noop;
     }
 
+    function getIndex(key){
+        for(var i = 0; i < keys.length; i++) {
+            if(angular.equals(key, keys[i])) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     function removeEvent(key) {
-        var index = keys.indexOf(key);
+        var index = getIndex(key);
         if (index !== -1) {
             keys.splice(index, 1);
             actions.splice(index, 1);

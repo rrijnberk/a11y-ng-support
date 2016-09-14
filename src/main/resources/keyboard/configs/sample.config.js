@@ -38,6 +38,10 @@
             console.log('Far out in a shifted space dude');
         }, false, false, true);
 
+        config.addEvent(a11y.keys.space, function () {
+            console.log('Controlled shift to alternate space is successful');
+        }, true, true, true);
+
     }
 
     angular

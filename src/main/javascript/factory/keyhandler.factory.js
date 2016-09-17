@@ -1,10 +1,10 @@
-function KeyHandlerFactory(keyboardConfiguration, eventKeyService) {
+function KeyHandlerFactory(keyboardConfiguration, eventKeyFactory) {
 
     function generateKeyHandler(configuration) {
         var config = keyboardConfiguration.getConfiguration(configuration);
 
         return function ($event) {
-            var key = eventKeyService.get($event),
+            var key = eventKeyFactory.get($event),
                 action = config.getEvent(key);
                 action($event);
         };

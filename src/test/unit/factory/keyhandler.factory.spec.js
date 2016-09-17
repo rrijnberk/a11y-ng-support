@@ -15,7 +15,7 @@ describe('The a11y ng support framework : factory : keyhandler factory', functio
         keyResponse = { key: 'a' },
         getSpy = jasmine.createSpy('eventKeyService.get')
             .and.returnValue(keyResponse),
-        eventKeyServiceSpy = jasmine.createSpy('eventKeyService.get')
+        eventKeyFactorySpy = jasmine.createSpy('eventKeyService.get')
             .and.returnValue({
                 get: getSpy
             });
@@ -24,7 +24,7 @@ describe('The a11y ng support framework : factory : keyhandler factory', functio
 
     beforeEach(module(function ($provide){
         $provide.service('keyboardConfiguration', keyboardConfigurationSpy);
-        $provide.service('eventKeyService', eventKeyServiceSpy);
+        $provide.service('eventKeyFactory', eventKeyFactorySpy);
     }));
 
     beforeEach(inject(function (_keyHandlerFactory_) {
@@ -36,7 +36,7 @@ describe('The a11y ng support framework : factory : keyhandler factory', functio
         getConfigurationSpy.calls.reset();
         keyboardConfigurationSpy.calls.reset();
         getSpy.calls.reset();
-        eventKeyServiceSpy.calls.reset();
+        eventKeyFactorySpy.calls.reset();
     });
 
     it('api should contain: getKeyHandler', function (){

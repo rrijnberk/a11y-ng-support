@@ -6,24 +6,26 @@ function isKey(key){
     return isKey || isCode || isKeyCode || isWhich;
 }
 
-function eventKeyService(a11y){
-    this.get = keyForEvent;
-
+function eventKeyFactory(a11y){
     function getValue(key){
         return a11y.keys[key];
     }
 
     function keyForEvent(event) {
         var key = Object.keys(a11y.keys).map(getValue).filter(angular.bind(event, isKey))[0],
-            keyResult = JSON.parse(JSON.stringify(key || {}));
+            keyResult = angular.copy(key) || {};
         keyResult.alt = !!event.altKey;
         keyResult.ctrl = !!event.ctrlKey;
         keyResult.shift = !!event.shiftKey;
         return keyResult;
     }
+
+    return {
+        get: keyForEvent
+    };
 }
 
 angular
     .module('a11y.support')
-    .service('eventKeyService', eventKeyService);
+    .factory('eventKeyFactory', eventKeyFactory);
 

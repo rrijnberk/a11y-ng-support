@@ -1,14 +1,14 @@
-describe('The a11y ng support framework : service : event key service ', function () {
-    var a11y, eventKeyService,
+describe('The a11y ng support framework : factory : event key factory ', function () {
+    var a11y, eventKeyFactory,
         enterResult = { key: 'Enter', keyCode: 13, which: 13, alt: false, ctrl: false, shift: false },
         spaceResult = { code: 'Space', keyCode: 32, which: 32, alt: false, ctrl: false, shift: false },
         blankResult = { alt: false, ctrl: false, shift: false };
 
     beforeEach(module('a11y.support'));
 
-    beforeEach(inject(function (_a11y_, _eventKeyService_) {
+    beforeEach(inject(function (_a11y_, _eventKeyFactory_) {
         a11y = _a11y_;
-        eventKeyService = _eventKeyService_;
+        eventKeyFactory = _eventKeyFactory_;
     }));
 
     afterEach(function (){
@@ -16,29 +16,29 @@ describe('The a11y ng support framework : service : event key service ', functio
     });
 
     it('api should contain: get', function (){
-        expect(eventKeyService.get).toBeDefined();
+        expect(eventKeyFactory.get).toBeDefined();
     });
 
     describe('should return enter for', function (){
         it('key: "Enter".', function (){
-            expect(eventKeyService.get({ key: "Enter" })).toEqual(enterResult);
+            expect(eventKeyFactory.get({ key: "Enter" })).toEqual(enterResult);
         });
 
         it('keyCode: "13".', function (){
-            expect(eventKeyService.get({ keyCode: 13 })).toEqual(enterResult);
+            expect(eventKeyFactory.get({ keyCode: 13 })).toEqual(enterResult);
         });
 
         it('which: "13".', function (){
-            expect(eventKeyService.get({ which: 13 })).toEqual(enterResult);
+            expect(eventKeyFactory.get({ which: 13 })).toEqual(enterResult);
         });
     });
 
     it('should return space for code: "Space".', function (){
-        expect(eventKeyService.get({ code: "Space" })).toEqual(spaceResult);
+        expect(eventKeyFactory.get({ code: "Space" })).toEqual(spaceResult);
     });
 
     it('should return a blank config (modifiers only) for non implemented key.', function (){
-        expect(eventKeyService.get({ key: "Alt" })).toEqual(blankResult);
+        expect(eventKeyFactory.get({ key: "Alt" })).toEqual(blankResult);
     });
 
 

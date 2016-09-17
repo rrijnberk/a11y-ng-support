@@ -3,8 +3,8 @@ function deconstruct($element, handler){
 }
 
 function A11yKeyboardController($scope, $element, keyHandlerFactory){
-    var ctrl = this,
-        handler = keyHandlerFactory.getKeyHandler(ctrl.a11yKeyboard);
+    var vm = this,
+        handler = keyHandlerFactory.getKeyHandler(vm.a11yKeyboard);
 
     if(!$element.attr('tabindex')) {
         $element.attr('tabindex', 0);
@@ -12,7 +12,7 @@ function A11yKeyboardController($scope, $element, keyHandlerFactory){
 
     $element.bind('keydown', handler);
 
-    $scope.$on('$destroy', angular.bind(ctrl, deconstruct, $element, handler));
+    $scope.$on('$destroy', angular.bind(vm, deconstruct, $element, handler));
 }
 
 function a11yKeyboardDirective(){

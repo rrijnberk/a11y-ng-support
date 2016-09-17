@@ -109,12 +109,12 @@ function Configuration() {
 
     function addEvents(keys, action, alt, ctrl, shift){
         keys.map(function (key){
-            addEvent(key, action, alt, ctrl, shift)
+            addEvent(key, action, alt, ctrl, shift);
         });
     }
     
     function generateTrueKey(key, alt, ctrl, shift){
-        var trueKey = JSON.parse(JSON.stringify(key));
+        var trueKey = angular.copy(key);
         trueKey.alt = !!alt;
         trueKey.ctrl = !!ctrl;
         trueKey.shift = !!shift;

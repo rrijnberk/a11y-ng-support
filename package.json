@@ -22,14 +22,8 @@
     }
   ],
   "main": "Gruntfile.js",
-  "engines": {
-    "node": ">= 0.8.0"
-  },
-  "scripts": {
-    "test": "grunt local"
-  },
   "dependencies": {
-    "angular": "^1.4.7"
+    "angular": "^1.4.0"
   },
   "keywords": [
     "angular",
@@ -41,12 +35,17 @@
   "devDependencies": {
     "angular-mocks": "^1.5.8",
     "connect-livereload": "0.5.4",
+    "eslint-config-angular": "^0.5.0",
+    "eslint-plugin-angular": "^1.4.0",
     "grunt": ">=0.4.0",
     "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-concat": "0.5.1",
     "grunt-contrib-connect": "^0.11.2",
-    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-uglify": "^0.11.1",
     "grunt-contrib-watch": "^0.6.1",
+    "grunt-eslint": "^19.0.0",
     "grunt-karma": "0.12.1",
+    "grunt-ng-annotate": "^2.0.2",
     "grunt-protractor-runner": "^3.0.0",
     "grunt-shell": "^1.1.2",
     "gruntmock": "^0.2.0",

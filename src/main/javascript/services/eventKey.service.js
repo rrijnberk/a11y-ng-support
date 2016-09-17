@@ -1,5 +1,9 @@
 function isKey(key){
-    return this.key === key.key || this.code === key.code || this.keyCode === key.keyCode || this.which === key.which;
+    var isKey = this.key && this.key === key.key,
+        isCode = this.code && this.code === key.code,
+        isKeyCode = this.keyCode && this.keyCode === key.keyCode,
+        isWhich = this.which && this.which === key.which;
+    return isKey || isCode || isKeyCode || isWhich;
 }
 
 function eventKeyService(a11y){
@@ -12,9 +16,9 @@ function eventKeyService(a11y){
     function keyForEvent(event) {
         var key = Object.keys(a11y.keys).map(getValue).filter(angular.bind(event, isKey))[0],
             keyResult = JSON.parse(JSON.stringify(key || {}));
-        keyResult.alt = event.altKey;
-        keyResult.ctrl = event.ctrlKey;
-        keyResult.shift = event.shiftKey;
+        keyResult.alt = !!event.altKey;
+        keyResult.ctrl = !!event.ctrlKey;
+        keyResult.shift = !!event.shiftKey;
         return keyResult;
     }
 }
@@ -22,3 +26,4 @@ function eventKeyService(a11y){
 angular
     .module('a11y.support')
     .service('eventKeyService', eventKeyService);
+

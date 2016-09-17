@@ -29,14 +29,7 @@
     "test": "grunt local"
   },
   "dependencies": {
-    "angular": "^1.4.7",
-    "angular-mocks": "^1.4.7",
-    "angular-resource": "^1.4.7",
-    "async": "^1.4.2",
-    "glob": "^7.0.0",
-    "grunt": "~0.4.5",
-    "lodash": "^4.6.0",
-    "path": "^0.12.7"
+    "angular": "^1.4.7"
   },
   "keywords": [
     "angular",
@@ -46,17 +39,26 @@
     "framework"
   ],
   "devDependencies": {
+    "angular-mocks": "^1.5.8",
     "connect-livereload": "0.5.4",
     "grunt": ">=0.4.0",
     "grunt-contrib-clean": "^1.0.0",
     "grunt-contrib-connect": "^0.11.2",
     "grunt-contrib-jshint": "^1.0.0",
     "grunt-contrib-watch": "^0.6.1",
+    "grunt-karma": "0.12.1",
     "grunt-protractor-runner": "^3.0.0",
     "grunt-shell": "^1.1.2",
     "gruntmock": "^0.2.0",
     "jasmine-node": "^1.14.5",
+    "karma": "0.13.19",
+    "karma-coverage": "0.5.3",
+    "karma-jasmine": "0.3.7",
+    "karma-junit-reporter": "0.3.8",
+    "karma-phantomjs-launcher": "1.0.0",
     "load-grunt-tasks": "^3.4.0",
+    "path": "^0.12.7",
+    "phantomjs-prebuilt": "2.1.4",
     "protractor": "^3.0.0",
     "serve-static": "^1.10.0"
   }

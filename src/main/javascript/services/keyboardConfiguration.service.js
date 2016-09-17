@@ -65,6 +65,7 @@ function ConfigurationMap() {
     this.add = add;
     this.get = get;
     this.remove = remove;
+    this.size = size;
 
     function add(key) {
         var config = new Configuration();
@@ -84,6 +85,10 @@ function ConfigurationMap() {
             configurations.splice(index, 1);
         }
     }
+
+    function size(){
+        return keys.length;
+    }
 }
 
 function Configuration() {
@@ -95,6 +100,7 @@ function Configuration() {
     this.addEvents = addEvents;
     this.getEvent = getEvent;
     this.removeEvent = removeEvent;
+    this.size = size;
 
     function addEvent(key, action, alt, ctrl, shift) {
         keys.push(generateTrueKey(key, alt, ctrl, shift));
@@ -151,6 +157,10 @@ function Configuration() {
             actions.splice(index, 1);
         }
     }
+
+    function size(){
+        return keys.length;
+    }
 }
 
 function keyboardConfigurationService() {
@@ -159,11 +169,15 @@ function keyboardConfigurationService() {
 
     service.addConfiguration = configs.add;
     service.getConfiguration = configs.get;
+    service.removeConfiguration = configs.remove;
+    service.size = configs.size;
 
     service.$get = function () {
         return {
             addConfiguration: configs.add,
-            getConfiguration: configs.get
+            getConfiguration: configs.get,
+            removeConfiguration: configs.remove,
+            size: configs.size
         };
     };
 }

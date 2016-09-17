@@ -16,8 +16,9 @@
 
         grunt.initConfig({
             appConfig : {
-                src: path.resolve(root, 'src', 'main', 'javascript'),
-                resources: path.resolve(root, 'src', 'main', 'resources')
+                dist: path.resolve(root, 'dist'),
+                resources: path.resolve(root, 'src', 'main', 'resources'),
+                src: path.resolve(root, 'src', 'main', 'javascript')
             }
         });
 

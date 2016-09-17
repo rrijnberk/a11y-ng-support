@@ -2,10 +2,10 @@ describe('The a11y ng support framework : factory : keyhandler factory', functio
     var keyHandlerFactory,
 
         actionSpy = jasmine.createSpy('action'),
-        getEventSpy = jasmine.createSpy('config.getEvent').and.returnValue(actionSpy),
+        getActionSpy = jasmine.createSpy('config.getAction').and.returnValue(actionSpy),
         getConfigurationSpy = jasmine.createSpy('keyboardConfiguration.getConfiguration')
             .and.returnValue({
-                getEvent: getEventSpy
+                getAction: getActionSpy
             }),
         keyboardConfigurationSpy = jasmine.createSpy('keyboardConfiguration')
             .and.returnValue({
@@ -63,7 +63,7 @@ describe('The a11y ng support framework : factory : keyhandler factory', functio
         });
 
         it('should get the action from the configuration based on the key', function (){
-            expect(getEventSpy).toHaveBeenCalledWith(keyResponse);
+            expect(getActionSpy).toHaveBeenCalledWith(keyResponse);
         });
 
         it('should trigger the action with the supplied event', function (){

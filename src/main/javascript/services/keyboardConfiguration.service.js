@@ -68,10 +68,11 @@ function ConfigurationMap() {
     this.size = size;
 
     function add(key) {
-        var config = new Configuration();
-        keys.push(key);
-        configurations.push(config);
-        return config;
+        if(keys.indexOf(key) === -1) {
+            keys.push(key);
+            configurations.push(new Configuration());
+        }
+        return get(key);
     }
 
     function get(key) {
@@ -95,21 +96,20 @@ function Configuration() {
     var keys = [],
         actions = [];
 
-    // Todo:  Is this the best name, event seems inappropriate?
-    this.addEvent = addEvent;
-    this.addEvents = addEvents;
-    this.getEvent = getEvent;
-    this.removeEvent = removeEvent;
+    this.addAction = addAction;
+    this.addActions = addActions;
+    this.getAction = getAction;
+    this.removeAction = removeAction;
     this.size = size;
 
-    function addEvent(key, action, alt, ctrl, shift) {
+    function addAction(key, action, alt, ctrl, shift) {
         keys.push(generateTrueKey(key, alt, ctrl, shift));
         actions.push(action);
     }
 
-    function addEvents(keys, action, alt, ctrl, shift){
+    function addActions(keys, action, alt, ctrl, shift){
         keys.map(function (key){
-            addEvent(key, action, alt, ctrl, shift);
+            addAction(key, action, alt, ctrl, shift);
         });
     }
     
@@ -121,7 +121,7 @@ function Configuration() {
         return trueKey;
     }
     
-    function getEvent(key) {
+    function getAction(key) {
         var action, trueKey;
         if (key) {
             action = actions[getIndex(key)];
@@ -150,7 +150,7 @@ function Configuration() {
         return -1;
     }
 
-    function removeEvent(key, alt, ctrl, shift) {
+    function removeAction(key, alt, ctrl, shift) {
         var index = getIndex(generateTrueKey(key, alt, ctrl, shift));
         if (index !== -1) {
             keys.splice(index, 1);

@@ -7,3 +7,9 @@ before_script:
 
 script:
   - grunt build
+
+deploy:
+  provider: npm
+  email: "r.rijnberk@gmail.com"
+  on:
+    branch: production

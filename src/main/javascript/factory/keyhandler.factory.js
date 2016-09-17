@@ -5,7 +5,7 @@ function KeyHandlerFactory(keyboardConfiguration, eventKeyFactory) {
 
         return function ($event) {
             var key = eventKeyFactory.get($event),
-                action = config.getEvent(key);
+                action = config.getAction(key);
                 action($event);
         };
     }

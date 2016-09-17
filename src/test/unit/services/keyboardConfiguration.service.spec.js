@@ -27,12 +27,18 @@ describe('The a11y ng support framework : service : keyboard configuration servi
         expect(keyboardConfiguration.size()).toBe(1);
     });
 
-    it('should be able to add a configuration.', function () {
+    it('should return a previously generated config when trying to create one with a existing key.', function () {
+        var config1 = keyboardConfiguration.addConfiguration('sample.configuration'),
+            config2 = keyboardConfiguration.addConfiguration('sample.configuration');
+        expect(config1).toBe(config2);
+    });
+
+    it('should be able to get a configuration.', function () {
         var config = keyboardConfiguration.addConfiguration('sample.configuration');
         expect(keyboardConfiguration.getConfiguration('sample.configuration')).toBe(config);
     });
 
-    it('should be able to add a configuration.', function () {
+    it('should be able to remove a configuration.', function () {
         keyboardConfiguration.addConfiguration('sample.configuration');
         keyboardConfiguration.removeConfiguration('sample.configuration');
         expect(keyboardConfiguration.size()).toBe(0);
@@ -62,75 +68,75 @@ describe('The a11y ng support framework : service : keyboard configuration servi
         });
 
         describe('api should contain:', function () {
-            it('addEvent', function () {
-                expect(config.addEvent).toBeDefined();
+            it('addAction', function () {
+                expect(config.addAction).toBeDefined();
             });
 
-            it('addEvents', function () {
-                expect(config.addEvents).toBeDefined();
+            it('addActions', function () {
+                expect(config.addActions).toBeDefined();
             });
 
-            it('getEvent', function () {
-                expect(config.getEvent).toBeDefined();
+            it('getAction', function () {
+                expect(config.getAction).toBeDefined();
             });
 
-            it('removeEvent', function () {
-                expect(config.removeEvent).toBeDefined();
+            it('removeAction', function () {
+                expect(config.removeAction).toBeDefined();
             });
         });
 
-        it('should be able to add a event for a specific key', function (){
-            config.addEvent(a11y.keys.enter, function (){});
+        it('should be able to add a action for a specific key', function (){
+            config.addAction(a11y.keys.enter, function (){});
             expect(config.size()).toBe(1);
         });
 
-        it('should be able to add a event for a specific key', function (){
-            config.addEvents([a11y.keys.enter, a11y.keys.backspace], function (){});
+        it('should be able to add a action for a specific key', function (){
+            config.addActions([a11y.keys.enter, a11y.keys.backspace], function (){});
             expect(config.size()).toBe(2);
         });
 
         it('should return void method for undefined key', function (){
-            expect(config.getEvent(undefined)).toEqual(angular.noop);
+            expect(config.getAction(undefined)).toEqual(angular.noop);
         });
 
         it('should return void method for non existent key', function (){
-            expect(config.getEvent(a11y.keys.enter)).toEqual(angular.noop);
+            expect(config.getAction(a11y.keys.enter)).toEqual(angular.noop);
         });
 
-        it('should be able to get a event for by it\'s key without modifiers', function (){
-            config.addEvents([a11y.keys.enter, a11y.keys.backspace], testFunction);
-            expect(config.getEvent(testKeys.enter)).toEqual(testFunction);
-        });
-
-        it('should be able to get a action for the alphabetic key', function (){
-            config.addEvent(a11y.keys.alphabetic, testFunction, true, false, true);
-            expect(config.getEvent(testKeys.a)).toBe(testFunction, 'Alphabetical keys should return the test method.');
-            expect(config.getEvent(testKeys[0])).toBe(angular.noop, 'Numerical keys should return the void method');
+        it('should be able to get a action for by it\'s key without modifiers', function (){
+            config.addActions([a11y.keys.enter, a11y.keys.backspace], testFunction);
+            expect(config.getAction(testKeys.enter)).toEqual(testFunction);
         });
 
         it('should be able to get a action for the alphabetic key', function (){
-            config.addEvent(a11y.keys.numeric, testFunction, true, false, true);
-            expect(config.getEvent(testKeys[0])).toBe(testFunction, 'Numerical keys should return the test method.');
-            expect(config.getEvent(testKeys.a)).toBe(angular.noop, 'Alphabetic keys should return the void method');
+            config.addAction(a11y.keys.alphabetic, testFunction, true, false, true);
+            expect(config.getAction(testKeys.a)).toBe(testFunction, 'Alphabetical keys should return the test method.');
+            expect(config.getAction(testKeys[0])).toBe(angular.noop, 'Numerical keys should return the void method');
         });
 
         it('should be able to get a action for the alphabetic key', function (){
-            config.addEvent(a11y.keys.alphanumeric, testFunction, true, false, true);
-            expect(config.getEvent(testKeys.a)).toBe(testFunction, 'Alphabetical keys should return the test method.');
-            expect(config.getEvent(testKeys[0])).toBe(testFunction, 'Numerical keys should return the test method.');
+            config.addAction(a11y.keys.numeric, testFunction, true, false, true);
+            expect(config.getAction(testKeys[0])).toBe(testFunction, 'Numerical keys should return the test method.');
+            expect(config.getAction(testKeys.a)).toBe(angular.noop, 'Alphabetic keys should return the void method');
         });
 
-        it('should be able to add a event for a specific key without modifiers', function (){
-            config.addEvents([a11y.keys.enter, a11y.keys.backspace], testFunction);
-            config.removeEvent(a11y.keys.enter);
+        it('should be able to get a action for the alphabetic key', function (){
+            config.addAction(a11y.keys.alphanumeric, testFunction, true, false, true);
+            expect(config.getAction(testKeys.a)).toBe(testFunction, 'Alphabetical keys should return the test method.');
+            expect(config.getAction(testKeys[0])).toBe(testFunction, 'Numerical keys should return the test method.');
+        });
+
+        it('should be able to add a action for a specific key without modifiers', function (){
+            config.addActions([a11y.keys.enter, a11y.keys.backspace], testFunction);
+            config.removeAction(a11y.keys.enter);
             expect(config.size()).toBe(1);
         });
 
         it('should not throw error when removing unbound key', function (){
             var error;
             try {
-                config.addEvents([a11y.keys.enter, a11y.keys.backspace], testFunction);
-                config.removeEvent(a11y.keys.space);
+                config.addActions([a11y.keys.enter, a11y.keys.backspace], testFunction);
+                config.removeAction(a11y.keys.space);
             } catch(err) {
                 error = err;
             }

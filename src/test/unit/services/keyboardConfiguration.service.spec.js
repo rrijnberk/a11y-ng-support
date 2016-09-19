@@ -33,6 +33,12 @@ describe('The a11y ng support framework : service : keyboard configuration servi
         expect(config1).toBe(config2);
     });
 
+    it('should return a unique key object when creating one with the unique key flag set to true.', function () {
+        var configObj = keyboardConfiguration.addConfiguration('sample.configuration', true);
+        expect(configObj.config).toBeDefined('There should be a config object');
+        expect(configObj.key).toBeDefined('There should be a key object');
+    });
+
     it('should be able to get a configuration.', function () {
         var config = keyboardConfiguration.addConfiguration('sample.configuration');
         expect(keyboardConfiguration.getConfiguration('sample.configuration')).toBe(config);

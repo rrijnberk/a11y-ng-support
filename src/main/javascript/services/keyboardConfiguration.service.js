@@ -67,12 +67,16 @@ function ConfigurationMap() {
     this.remove = remove;
     this.size = size;
 
-    function add(key) {
-        if(keys.indexOf(key) === -1) {
-            keys.push(key);
+    function add(key, hasUniqueKey) {
+        var trueKey = key.concat(hasUniqueKey ? '_' + Math.round(Math.random() * 100000).toString(): '');
+        if(keys.indexOf(trueKey) === -1) {
+            keys.push(trueKey);
             configurations.push(new Configuration());
         }
-        return get(key);
+        return hasUniqueKey ? {
+            config: get(trueKey),
+            key: trueKey
+        } : get(trueKey);
     }
 
     function get(key) {

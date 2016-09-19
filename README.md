@@ -29,8 +29,16 @@ You can setup actions using the configuration service in a controller and/or dur
 
 Creating a configuration:
 ```javascript
-        var config = keyboardConfiguration.addConfiguration('sample.span.interaction');
+        var config = keyboardConfiguration.addConfiguration('sample.span.interaction', [unique key flag]);
 ```
+If set to true, the unique key is returned with the config in an object.
+```javascript
+    {
+        config: 'The configuration itself',
+        key: 'The unique key'
+    }
+```
+
 
 Adding actions:
 ```javascript

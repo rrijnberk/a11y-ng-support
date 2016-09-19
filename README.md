@@ -1,4 +1,4 @@
-# a11y-ng-support ![Travis build status](https://travis-ci.org/rrijnberk/a11y-ng-support.png?branch=master)
+# a11y-ng-support &nbsp;![Travis build status](https://travis-ci.org/rrijnberk/a11y-ng-support.png?branch=master)
 
 > Accessibility support framework for Angular 1.4+ projects
 

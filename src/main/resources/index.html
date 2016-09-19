@@ -11,9 +11,10 @@
     <script src="/directives/a11y.keyboard.directive.js"></script>
     <script src="/keyboard/configs/sample.config.js"></script>
 </head>
-<body >
-    <input type="checkbox" ng-model="hideHeader"> Hide header
+<body ng-controller="sampleController as ctrl">
+    <input type="checkbox" ng-model="hideHeader"> Hide header | <button type="button" ng-click="ctrl.toggleKey()">Toggle key</button>
     <hr />
-    <h1 ng-if="!hideHeader" a11y-keyboard="component.header.interaction">Hello world 3</h1>
+    <h1 ng-if="!hideHeader" a11y-keyboard="ctrl.key">Binding test</h1>
+    <h1 a11y-keyboard="component.header.interaction.gamma">String test</h1>
 </body>
 </html>

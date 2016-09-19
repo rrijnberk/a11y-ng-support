@@ -1,24 +1,38 @@
-function deconstruct($element, handler){
-    $element.unbind('keydown', handler);
-}
-
 function A11yKeyboardController($scope, $element, keyHandlerFactory){
     var vm = this,
-        handler = keyHandlerFactory.getKeyHandler(vm.a11yKeyboard);
+        handler = null;
 
     if(!$element.attr('tabindex')) {
         $element.attr('tabindex', 0);
     }
 
-    $element.bind('keydown', handler);
+    $scope.$watch(getKeyValue, updateKeyHandler);
+    $scope.$on('$destroy', deconstruct);
 
-    $scope.$on('$destroy', angular.bind(vm, deconstruct, $element, handler));
+    function deconstruct(){
+        $element.unbind('keydown', handler);
+    }
+
+    function getKeyValue(){
+        return vm.a11yKeyboard || vm.a11yKeyboardStr;
+    }
+
+    function updateKeyHandler(){
+        deconstruct();
+        if(vm.a11yKeyboard || vm.a11yKeyboardStr) {
+            handler = keyHandlerFactory.getKeyHandler(vm.a11yKeyboard || vm.a11yKeyboardStr);
+            if(handler) {
+                $element.bind('keydown', handler);
+            }
+        }
+    }
 }
 
 function a11yKeyboardDirective(){
     return {
         bindToController: {
-            a11yKeyboard: '@'
+            a11yKeyboard: '=',
+            a11yKeyboardStr: '@a11yKeyboard'
         },
         controller: 'a11yKeyboardController',
         controllerAs: 'a11yKeyboardCtrl',
